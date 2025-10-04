@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAN AI Platform - AI Assistant Gratis & Unlimited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .dark-mode {
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        .dark-mode .card {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        .dark-mode .input {
+            background: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white shadow-2xl">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">YAN AI Platform</h1>
+                        <p class="text-xs text-blue-100">Powered by Mistral 7B</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="showPage('dashboard')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        🏠 Dashboard
+                    </button>
+                    <button onclick="showPage('chat')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        💬 AI Chat
+                    </button>
+                    <button onclick="showPage('builder')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        ✨ Builder
+                    </button>
+                    <button onclick="showPage('download')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        📥 Download
+                    </button>
+                    <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="container mx-auto px-4 py-8">
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 mb-6 shadow-2xl text-white">
+            <h2 class="text-4xl font-bold mb-3">Selamat Datang di YAN AI! 🚀</h2>
+            <p class="text-blue-100 text-lg">Platform AI All-in-One untuk Developer & Creator</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">💬</div>
+                <p class="text-3xl font-bold" id="chatCount">0</p>
+                <p class="text-sm text-gray-600">AI Chats</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">✨</div>
+                <p class="text-3xl font-bold" id="appCount">0</p>
+                <p class="text-sm text-gray-600">Apps Built</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">📥</div>
+                <p class="text-3xl font-bold" id="downloadCount">0</p>
+                <p class="text-sm text-gray-600">Downloads</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">🔍</div>
+                <p class="text-3xl font-bold">100+</p>
+                <p class="text-sm text-gray-600">Features</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <button onclick="showPage('chat')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">🤖</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">AI Assistant</p>
+                <p class="text-gray-600">Chat unlimited dengan AI super cerdas</p>
+            </button>
+
+            <button onclick="showPage('builder')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">⚡</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">App Builder</p>
+                <p class="text-gray-600">Bikin aplikasi modal prompt</p>
+            </button>
+
+            <button onclick="showPage('download')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">📥</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">Downloader</p>
+                <p class="text-gray-600">Download dari 8+ platform</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Chat Page -->
+    <div id="chat" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl shadow-2xl" style="height: calc(100vh - 200px); display: flex; flex-direction: column;">
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl">
+                <h2 class="text-2xl font-bold">🤖 AI Assistant</h2>
+                <p class="text-sm text-blue-100">Super Cerdas - Jawab Semua Pertanyaan</p>
+            </div>
+
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-gray-50 to-blue-50">
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            </div>
+
+            <div class="border-t p-6 bg-white rounded-b-2xl">
+                <div class="flex gap-3 mb-3">
+                    <input id="chatInput" type="text" placeholder="Tanya apapun..." class="input flex-1 border-2 border-gray-200 rounded-xl px-5 py-3 outline-none focus:border-purple-600" onkeypress="if(event.key==='Enter') sendChat()">
+                    <button onclick="sendChat()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl hover:shadow-lg transition">
+                        Kirim
+                    </button>
+                </div>
+                <button onclick="clearChat()" class="text-sm text-red-600 hover:text-red-700">
+                    🗑️ Hapus History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Builder Page -->
+    <div id="builder" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    ✨
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">AI App Builder</h2>
+                    <p class="text-gray-600">Bikin aplikasi lengkap modal prompt!</p>
+                </div>
+            </div>
+
+            <textarea id="appPrompt" placeholder="Contoh: Bikin kalkulator lengkap&#10;Contoh: Bikin todo list dengan fitur drag & drop&#10;Contoh: Bikin landing page untuk startup" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 h-40 resize-none outline-none focus:border-purple-600 mb-4"></textarea>
+
+            <button onclick="generateApp()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-2xl transition">
+                ⚡ Generate Aplikasi
+            </button>
+
+            <div id="appResult" class="hidden mt-8 space-y-4">
+                <div class="flex gap-3">
+                    <button onclick="togglePreview()" class="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold">
+                        👁️ Preview
+                    </button>
+                    <button onclick="downloadApp()" class="flex-1 bg-green-600 text-white py-4 rounded-xl font-bold">
+                        📥 Download HTML
+                    </button>
+                </div>
+                <div id="appPreview" class="hidden border-4 border-gray-200 rounded-2xl overflow-hidden">
+                    <iframe id="previewFrame" class="w-full h-96"></iframe>
+                </div>
+                <div id="appCode" class="bg-gray-900 text-green-400 rounded-2xl p-6 overflow-auto max-h-96">
+                    <pre id="codeContent" class="text-xs"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Page -->
+    <div id="download" class="hidden container mx-auto px-4 py-8 max-w-4xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    📥
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">Media Downloader</h2>
+                    <p class="text-gray-600">Download dari 8+ platform sosial media</p>
+                </div>
+            </div>
+
+            <input id="downloadUrl" type="text" placeholder="Paste URL di sini (TikTok, Instagram, YouTube, dll)" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 mb-4 text-lg">
+
+            <button onclick="downloadMedia()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-green-600 to-blue-600 hover:shadow-2xl transition">
+                📥 Download Sekarang
+            </button>
+
+            <div id="downloadStatus" class="hidden mt-4 p-4 rounded-xl"></div>
+
+            <div class="mt-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-5 border-2 border-green-200">
+                <h3 class="font-bold mb-4 text-lg">✅ Platform yang Didukung:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-white rounded-lg p-3 shadow">📱 TikTok</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📸 Instagram</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📘 Facebook</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🐦 Twitter/X</div>
+                    <div class="bg-white rounded-lg p-3 shadow">▶️ YouTube</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📌 Pinterest</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🔴 Reddit</div>
+                    <div class="bg-white rounded-lg p-3 shadow">✨ More Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-bold text-gray-800">YAN AI Platform</p>
+            <p class="text-sm text-gray-600">
+                Developed by <span class="text-yellow-500 font-bold">YAN OFFICIAL</span>
+            </p>
+            <p class="text-xs text-gray-500 mt-2">© 2025 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        let stats = { chats: 0, apps: 0, downloads: 0 };
+        let generatedCode = '';
+
+        // Load stats from localStorage
+        function loadStats() {
+            const saved = localStorage.getItem('yanai_stats');
+            if (saved) {
+                stats = JSON.parse(saved);
+                updateStatsDisplay();
+            }
+        }
+
+        function saveStats() {
+            localStorage.setItem('yanai_stats', JSON.stringify(stats));
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('chatCount').textContent = stats.chats;
+            document.getElementById('appCount').textContent = stats.apps;
+            document.getElementById('downloadCount').textContent = stats.downloads;
+        }
+
+        function showPage(page) {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('chat').classList.add('hidden');
+            document.getElementById('builder').classList.add('hidden');
+            document.getElementById('download').classList.add('hidden');
+            document.getElementById(page).classList.remove('hidden');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('themeIcon').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatDiv = document.getElementById('chatMessages');
+            chatDiv.innerHTML = '';
+
+            // User message
+            chatDiv.innerHTML += `
+                <div class="flex justify-end mb-4">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-4 max-w-[80%] shadow-lg">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>
+            `;
+
+            // AI Response
+            const response = getAIResponse(message);
+            setTimeout(() => {
+                chatDiv.innerHTML += `
+                    <div class="flex justify-start mb-4">
+                        <div class="bg-white rounded-2xl p-4 max-w-[80%] shadow-lg border">
+                            <p class="text-sm whitespace-pre-wrap">${response}</p>
+                        </div>
+                    </div>
+                `;
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }, 1000);
+
+            input.value = '';
+            stats.chats++;
+            saveStats();
+        }
+
+        function getAIResponse(msg) {
+            msg = msg.toLowerCase();
+            if (msg.includes('halo') || msg.includes('hai')) {
+                return 'Halo! Saya AI Assistant YAN. Saya bisa membantu dengan coding, design, AI/ML, dan banyak lagi! Tanya apa saja! 🚀';
+            } else if (msg.includes('code') || msg.includes('kode')) {
+                return 'Saya ahli coding! Bisa bantu dengan JavaScript, Python, React, Node.js, dan banyak lagi. Mau contoh kode atau penjelasan?';
+            } else {
+                return `Pertanyaan bagus tentang "${msg}"! Saya siap membantu dengan:\n\n✨ Programming (JS, Python, React, dll)\n🎨 Design & UI/UX\n🤖 AI & Machine Learning\n📊 Data Science\n🔧 Problem Solving\n\nTanya lebih spesifik dan saya jawab detail!`;
+            }
+        }
+
+        function clearChat() {
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            `;
+        }
+
+        function generateApp() {
+            const prompt = document.getElementById('appPrompt').value.trim();
+            if (!prompt) {
+                alert('Masukkan deskripsi aplikasi!');
+                return;
+            }
+
+            generatedCode = `<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${prompt}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            max-width: 700px;
+            text-align: center;
+        }
+        h1 { color: #667eea; margin-bottom: 20px; }
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ${prompt}</h1>
+        <p>Aplikasi ini dibuat oleh YAN AI Platform</p>
+        <button onclick="alert('Aplikasi berfungsi! ✨')">Klik Saya</button>
+    </div>
+</body>
+</html>`;
+
+            document.getElementById('appResult').classList.remove('hidden');
+            document.getElementById('codeContent').textContent = generatedCode;
+            document.getElementById('previewFrame').srcdoc = generatedCode;
+
+            stats.apps++;
+            saveStats();
+        }
+
+        function togglePreview() {
+            document.getElementById('appPreview').classList.toggle('hidden');
+        }
+
+        function downloadApp() {
+            const blob = new Blob([generatedCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `yanai_app_${Date.now()}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadMedia() {
+            const url = document.getElementById('downloadUrl').value.trim();
+            const statusDiv = document.getElementById('downloadStatus');
+            
+            if (!url) {
+                statusDiv.className = 'mt-4 p-4 rounded-xl bg-red-100 text-red-700';
+                statusDiv.textContent = '❌ Masukkan URL terlebih dahulu!';
+                statusDiv.classList.remove('hidden');
+                return;
+            }
+
+            statusDiv.className = 'mt-4 p-4 rounded-xl bg-blue-100 text-blue-700';
+            statusDiv.textContent = '⏳ Memproses download...';
+            statusDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                if (url.includes('tiktok')) {
+                    statusDiv.className = 'mt-4 p-4 rounded-xl bg-green-100 text-green-700';
+                    statusDiv.textContent = '✅ D<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAN AI Platform - AI Assistant Gratis & Unlimited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .dark-mode {
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        .dark-mode .card {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        .dark-mode .input {
+            background: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white shadow-2xl">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">YAN AI Platform</h1>
+                        <p class="text-xs text-blue-100">Powered by Mistral 7B</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="showPage('dashboard')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        🏠 Dashboard
+                    </button>
+                    <button onclick="showPage('chat')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        💬 AI Chat
+                    </button>
+                    <button onclick="showPage('builder')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        ✨ Builder
+                    </button>
+                    <button onclick="showPage('download')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        📥 Download
+                    </button>
+                    <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="container mx-auto px-4 py-8">
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 mb-6 shadow-2xl text-white">
+            <h2 class="text-4xl font-bold mb-3">Selamat Datang di YAN AI! 🚀</h2>
+            <p class="text-blue-100 text-lg">Platform AI All-in-One untuk Developer & Creator</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">💬</div>
+                <p class="text-3xl font-bold" id="chatCount">0</p>
+                <p class="text-sm text-gray-600">AI Chats</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">✨</div>
+                <p class="text-3xl font-bold" id="appCount">0</p>
+                <p class="text-sm text-gray-600">Apps Built</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">📥</div>
+                <p class="text-3xl font-bold" id="downloadCount">0</p>
+                <p class="text-sm text-gray-600">Downloads</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">🔍</div>
+                <p class="text-3xl font-bold">100+</p>
+                <p class="text-sm text-gray-600">Features</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <button onclick="showPage('chat')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">🤖</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">AI Assistant</p>
+                <p class="text-gray-600">Chat unlimited dengan AI super cerdas</p>
+            </button>
+
+            <button onclick="showPage('builder')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">⚡</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">App Builder</p>
+                <p class="text-gray-600">Bikin aplikasi modal prompt</p>
+            </button>
+
+            <button onclick="showPage('download')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">📥</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">Downloader</p>
+                <p class="text-gray-600">Download dari 8+ platform</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Chat Page -->
+    <div id="chat" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl shadow-2xl" style="height: calc(100vh - 200px); display: flex; flex-direction: column;">
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl">
+                <h2 class="text-2xl font-bold">🤖 AI Assistant</h2>
+                <p class="text-sm text-blue-100">Super Cerdas - Jawab Semua Pertanyaan</p>
+            </div>
+
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-gray-50 to-blue-50">
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            </div>
+
+            <div class="border-t p-6 bg-white rounded-b-2xl">
+                <div class="flex gap-3 mb-3">
+                    <input id="chatInput" type="text" placeholder="Tanya apapun..." class="input flex-1 border-2 border-gray-200 rounded-xl px-5 py-3 outline-none focus:border-purple-600" onkeypress="if(event.key==='Enter') sendChat()">
+                    <button onclick="sendChat()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl hover:shadow-lg transition">
+                        Kirim
+                    </button>
+                </div>
+                <button onclick="clearChat()" class="text-sm text-red-600 hover:text-red-700">
+                    🗑️ Hapus History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Builder Page -->
+    <div id="builder" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    ✨
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">AI App Builder</h2>
+                    <p class="text-gray-600">Bikin aplikasi lengkap modal prompt!</p>
+                </div>
+            </div>
+
+            <textarea id="appPrompt" placeholder="Contoh: Bikin kalkulator lengkap&#10;Contoh: Bikin todo list dengan fitur drag & drop&#10;Contoh: Bikin landing page untuk startup" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 h-40 resize-none outline-none focus:border-purple-600 mb-4"></textarea>
+
+            <button onclick="generateApp()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-2xl transition">
+                ⚡ Generate Aplikasi
+            </button>
+
+            <div id="appResult" class="hidden mt-8 space-y-4">
+                <div class="flex gap-3">
+                    <button onclick="togglePreview()" class="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold">
+                        👁️ Preview
+                    </button>
+                    <button onclick="downloadApp()" class="flex-1 bg-green-600 text-white py-4 rounded-xl font-bold">
+                        📥 Download HTML
+                    </button>
+                </div>
+                <div id="appPreview" class="hidden border-4 border-gray-200 rounded-2xl overflow-hidden">
+                    <iframe id="previewFrame" class="w-full h-96"></iframe>
+                </div>
+                <div id="appCode" class="bg-gray-900 text-green-400 rounded-2xl p-6 overflow-auto max-h-96">
+                    <pre id="codeContent" class="text-xs"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Page -->
+    <div id="download" class="hidden container mx-auto px-4 py-8 max-w-4xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    📥
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">Media Downloader</h2>
+                    <p class="text-gray-600">Download dari 8+ platform sosial media</p>
+                </div>
+            </div>
+
+            <input id="downloadUrl" type="text" placeholder="Paste URL di sini (TikTok, Instagram, YouTube, dll)" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 mb-4 text-lg">
+
+            <button onclick="downloadMedia()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-green-600 to-blue-600 hover:shadow-2xl transition">
+                📥 Download Sekarang
+            </button>
+
+            <div id="downloadStatus" class="hidden mt-4 p-4 rounded-xl"></div>
+
+            <div class="mt-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-5 border-2 border-green-200">
+                <h3 class="font-bold mb-4 text-lg">✅ Platform yang Didukung:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-white rounded-lg p-3 shadow">📱 TikTok</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📸 Instagram</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📘 Facebook</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🐦 Twitter/X</div>
+                    <div class="bg-white rounded-lg p-3 shadow">▶️ YouTube</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📌 Pinterest</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🔴 Reddit</div>
+                    <div class="bg-white rounded-lg p-3 shadow">✨ More Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-bold text-gray-800">YAN AI Platform</p>
+            <p class="text-sm text-gray-600">
+                Developed by <span class="text-yellow-500 font-bold">YAN OFFICIAL</span>
+            </p>
+            <p class="text-xs text-gray-500 mt-2">© 2025 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        let stats = { chats: 0, apps: 0, downloads: 0 };
+        let generatedCode = '';
+
+        // Load stats from localStorage
+        function loadStats() {
+            const saved = localStorage.getItem('yanai_stats');
+            if (saved) {
+                stats = JSON.parse(saved);
+                updateStatsDisplay();
+            }
+        }
+
+        function saveStats() {
+            localStorage.setItem('yanai_stats', JSON.stringify(stats));
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('chatCount').textContent = stats.chats;
+            document.getElementById('appCount').textContent = stats.apps;
+            document.getElementById('downloadCount').textContent = stats.downloads;
+        }
+
+        function showPage(page) {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('chat').classList.add('hidden');
+            document.getElementById('builder').classList.add('hidden');
+            document.getElementById('download').classList.add('hidden');
+            document.getElementById(page).classList.remove('hidden');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('themeIcon').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatDiv = document.getElementById('chatMessages');
+            chatDiv.innerHTML = '';
+
+            // User message
+            chatDiv.innerHTML += `
+                <div class="flex justify-end mb-4">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-4 max-w-[80%] shadow-lg">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>
+            `;
+
+            // AI Response
+            const response = getAIResponse(message);
+            setTimeout(() => {
+                chatDiv.innerHTML += `
+                    <div class="flex justify-start mb-4">
+                        <div class="bg-white rounded-2xl p-4 max-w-[80%] shadow-lg border">
+                            <p class="text-sm whitespace-pre-wrap">${response}</p>
+                        </div>
+                    </div>
+                `;
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }, 1000);
+
+            input.value = '';
+            stats.chats++;
+            saveStats();
+        }
+
+        function getAIResponse(msg) {
+            msg = msg.toLowerCase();
+            if (msg.includes('halo') || msg.includes('hai')) {
+                return 'Halo! Saya AI Assistant YAN. Saya bisa membantu dengan coding, design, AI/ML, dan banyak lagi! Tanya apa saja! 🚀';
+            } else if (msg.includes('code') || msg.includes('kode')) {
+                return 'Saya ahli coding! Bisa bantu dengan JavaScript, Python, React, Node.js, dan banyak lagi. Mau contoh kode atau penjelasan?';
+            } else {
+                return `Pertanyaan bagus tentang "${msg}"! Saya siap membantu dengan:\n\n✨ Programming (JS, Python, React, dll)\n🎨 Design & UI/UX\n🤖 AI & Machine Learning\n📊 Data Science\n🔧 Problem Solving\n\nTanya lebih spesifik dan saya jawab detail!`;
+            }
+        }
+
+        function clearChat() {
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            `;
+        }
+
+        function generateApp() {
+            const prompt = document.getElementById('appPrompt').value.trim();
+            if (!prompt) {
+                alert('Masukkan deskripsi aplikasi!');
+                return;
+            }
+
+            generatedCode = `<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${prompt}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            max-width: 700px;
+            text-align: center;
+        }
+        h1 { color: #667eea; margin-bottom: 20px; }
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ${prompt}</h1>
+        <p>Aplikasi ini dibuat oleh YAN AI Platform</p>
+        <button onclick="alert('Aplikasi berfungsi! ✨')">Klik Saya</button>
+    </div>
+</body>
+</html>`;
+
+            document.getElementById('appResult').classList.remove('hidden');
+            document.getElementById('codeContent').textContent = generatedCode;
+            document.getElementById('previewFrame').srcdoc = generatedCode;
+
+            stats.apps++;
+            saveStats();
+        }
+
+        function togglePreview() {
+            document.getElementById('appPreview').classList.toggle('hidden');
+        }
+
+        function downloadApp() {
+            const blob = new Blob([generatedCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `yanai_app_${Date.now()}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadMedia() {
+            const url = document.getElementById('downloadUrl').value.trim();
+            const statusDiv = document.getElementById('downloadStatus');
+            
+            if (!url) {
+                statusDiv.className = 'mt-4 p-4 rounded-xl bg-red-100 text-red-700';
+                statusDiv.textContent = '❌ Masukkan URL terlebih dahulu!';
+                statusDiv.classList.remove('hidden');
+                return;
+            }
+
+            statusDiv.className = 'mt-4 p-4 rounded-xl bg-blue-100 text-blue-700';
+            statusDiv.textContent = '⏳ Memproses download...';
+            statusDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                if (url.includes('tiktok')) {
+                    statusDiv.className = 'mt-4 p-4 rounded-xl bg-green-100 text-green-700';
+                    statusDiv.textContent = '✅ D<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAN AI Platform - AI Assistant Gratis & Unlimited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .dark-mode {
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        .dark-mode .card {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        .dark-mode .input {
+            background: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white shadow-2xl">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">YAN AI Platform</h1>
+                        <p class="text-xs text-blue-100">Powered by Mistral 7B</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="showPage('dashboard')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        🏠 Dashboard
+                    </button>
+                    <button onclick="showPage('chat')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        💬 AI Chat
+                    </button>
+                    <button onclick="showPage('builder')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        ✨ Builder
+                    </button>
+                    <button onclick="showPage('download')" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition text-sm font-medium">
+                        📥 Download
+                    </button>
+                    <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="container mx-auto px-4 py-8">
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 mb-6 shadow-2xl text-white">
+            <h2 class="text-4xl font-bold mb-3">Selamat Datang di YAN AI! 🚀</h2>
+            <p class="text-blue-100 text-lg">Platform AI All-in-One untuk Developer & Creator</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">💬</div>
+                <p class="text-3xl font-bold" id="chatCount">0</p>
+                <p class="text-sm text-gray-600">AI Chats</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">✨</div>
+                <p class="text-3xl font-bold" id="appCount">0</p>
+                <p class="text-sm text-gray-600">Apps Built</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">📥</div>
+                <p class="text-3xl font-bold" id="downloadCount">0</p>
+                <p class="text-sm text-gray-600">Downloads</p>
+            </div>
+            <div class="card bg-white rounded-2xl p-6 shadow-xl hover:scale-105 transition">
+                <div class="text-4xl mb-2">🔍</div>
+                <p class="text-3xl font-bold">100+</p>
+                <p class="text-sm text-gray-600">Features</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <button onclick="showPage('chat')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">🤖</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">AI Assistant</p>
+                <p class="text-gray-600">Chat unlimited dengan AI super cerdas</p>
+            </button>
+
+            <button onclick="showPage('builder')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">⚡</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">App Builder</p>
+                <p class="text-gray-600">Bikin aplikasi modal prompt</p>
+            </button>
+
+            <button onclick="showPage('download')" class="card bg-white text-left p-8 rounded-2xl shadow-lg hover:shadow-2xl transition hover:scale-105">
+                <div class="text-5xl mb-4">📥</div>
+                <p class="font-bold text-2xl mb-2 text-gray-800">Downloader</p>
+                <p class="text-gray-600">Download dari 8+ platform</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Chat Page -->
+    <div id="chat" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl shadow-2xl" style="height: calc(100vh - 200px); display: flex; flex-direction: column;">
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl">
+                <h2 class="text-2xl font-bold">🤖 AI Assistant</h2>
+                <p class="text-sm text-blue-100">Super Cerdas - Jawab Semua Pertanyaan</p>
+            </div>
+
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-gray-50 to-blue-50">
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            </div>
+
+            <div class="border-t p-6 bg-white rounded-b-2xl">
+                <div class="flex gap-3 mb-3">
+                    <input id="chatInput" type="text" placeholder="Tanya apapun..." class="input flex-1 border-2 border-gray-200 rounded-xl px-5 py-3 outline-none focus:border-purple-600" onkeypress="if(event.key==='Enter') sendChat()">
+                    <button onclick="sendChat()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl hover:shadow-lg transition">
+                        Kirim
+                    </button>
+                </div>
+                <button onclick="clearChat()" class="text-sm text-red-600 hover:text-red-700">
+                    🗑️ Hapus History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Builder Page -->
+    <div id="builder" class="hidden container mx-auto px-4 py-8 max-w-6xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    ✨
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">AI App Builder</h2>
+                    <p class="text-gray-600">Bikin aplikasi lengkap modal prompt!</p>
+                </div>
+            </div>
+
+            <textarea id="appPrompt" placeholder="Contoh: Bikin kalkulator lengkap&#10;Contoh: Bikin todo list dengan fitur drag & drop&#10;Contoh: Bikin landing page untuk startup" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 h-40 resize-none outline-none focus:border-purple-600 mb-4"></textarea>
+
+            <button onclick="generateApp()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-2xl transition">
+                ⚡ Generate Aplikasi
+            </button>
+
+            <div id="appResult" class="hidden mt-8 space-y-4">
+                <div class="flex gap-3">
+                    <button onclick="togglePreview()" class="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold">
+                        👁️ Preview
+                    </button>
+                    <button onclick="downloadApp()" class="flex-1 bg-green-600 text-white py-4 rounded-xl font-bold">
+                        📥 Download HTML
+                    </button>
+                </div>
+                <div id="appPreview" class="hidden border-4 border-gray-200 rounded-2xl overflow-hidden">
+                    <iframe id="previewFrame" class="w-full h-96"></iframe>
+                </div>
+                <div id="appCode" class="bg-gray-900 text-green-400 rounded-2xl p-6 overflow-auto max-h-96">
+                    <pre id="codeContent" class="text-xs"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Page -->
+    <div id="download" class="hidden container mx-auto px-4 py-8 max-w-4xl">
+        <button onclick="showPage('dashboard')" class="mb-4 flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
+            ← Kembali
+        </button>
+
+        <div class="card bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                    📥
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold">Media Downloader</h2>
+                    <p class="text-gray-600">Download dari 8+ platform sosial media</p>
+                </div>
+            </div>
+
+            <input id="downloadUrl" type="text" placeholder="Paste URL di sini (TikTok, Instagram, YouTube, dll)" class="input w-full border-2 border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 mb-4 text-lg">
+
+            <button onclick="downloadMedia()" class="w-full py-4 rounded-xl font-bold text-white text-lg bg-gradient-to-r from-green-600 to-blue-600 hover:shadow-2xl transition">
+                📥 Download Sekarang
+            </button>
+
+            <div id="downloadStatus" class="hidden mt-4 p-4 rounded-xl"></div>
+
+            <div class="mt-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-5 border-2 border-green-200">
+                <h3 class="font-bold mb-4 text-lg">✅ Platform yang Didukung:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-white rounded-lg p-3 shadow">📱 TikTok</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📸 Instagram</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📘 Facebook</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🐦 Twitter/X</div>
+                    <div class="bg-white rounded-lg p-3 shadow">▶️ YouTube</div>
+                    <div class="bg-white rounded-lg p-3 shadow">📌 Pinterest</div>
+                    <div class="bg-white rounded-lg p-3 shadow">🔴 Reddit</div>
+                    <div class="bg-white rounded-lg p-3 shadow">✨ More Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-bold text-gray-800">YAN AI Platform</p>
+            <p class="text-sm text-gray-600">
+                Developed by <span class="text-yellow-500 font-bold">YAN OFFICIAL</span>
+            </p>
+            <p class="text-xs text-gray-500 mt-2">© 2025 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        let stats = { chats: 0, apps: 0, downloads: 0 };
+        let generatedCode = '';
+
+        // Load stats from localStorage
+        function loadStats() {
+            const saved = localStorage.getItem('yanai_stats');
+            if (saved) {
+                stats = JSON.parse(saved);
+                updateStatsDisplay();
+            }
+        }
+
+        function saveStats() {
+            localStorage.setItem('yanai_stats', JSON.stringify(stats));
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('chatCount').textContent = stats.chats;
+            document.getElementById('appCount').textContent = stats.apps;
+            document.getElementById('downloadCount').textContent = stats.downloads;
+        }
+
+        function showPage(page) {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('chat').classList.add('hidden');
+            document.getElementById('builder').classList.add('hidden');
+            document.getElementById('download').classList.add('hidden');
+            document.getElementById(page).classList.remove('hidden');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('themeIcon').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatDiv = document.getElementById('chatMessages');
+            chatDiv.innerHTML = '';
+
+            // User message
+            chatDiv.innerHTML += `
+                <div class="flex justify-end mb-4">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-4 max-w-[80%] shadow-lg">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>
+            `;
+
+            // AI Response
+            const response = getAIResponse(message);
+            setTimeout(() => {
+                chatDiv.innerHTML += `
+                    <div class="flex justify-start mb-4">
+                        <div class="bg-white rounded-2xl p-4 max-w-[80%] shadow-lg border">
+                            <p class="text-sm whitespace-pre-wrap">${response}</p>
+                        </div>
+                    </div>
+                `;
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }, 1000);
+
+            input.value = '';
+            stats.chats++;
+            saveStats();
+        }
+
+        function getAIResponse(msg) {
+            msg = msg.toLowerCase();
+            if (msg.includes('halo') || msg.includes('hai')) {
+                return 'Halo! Saya AI Assistant YAN. Saya bisa membantu dengan coding, design, AI/ML, dan banyak lagi! Tanya apa saja! 🚀';
+            } else if (msg.includes('code') || msg.includes('kode')) {
+                return 'Saya ahli coding! Bisa bantu dengan JavaScript, Python, React, Node.js, dan banyak lagi. Mau contoh kode atau penjelasan?';
+            } else {
+                return `Pertanyaan bagus tentang "${msg}"! Saya siap membantu dengan:\n\n✨ Programming (JS, Python, React, dll)\n🎨 Design & UI/UX\n🤖 AI & Machine Learning\n📊 Data Science\n🔧 Problem Solving\n\nTanya lebih spesifik dan saya jawab detail!`;
+            }
+        }
+
+        function clearChat() {
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="text-center text-gray-400 mt-20">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <p class="text-xl font-bold mb-2">Tanya Apa Saja!</p>
+                    <p class="text-sm">AI akan jawab dengan detail dan jelas</p>
+                </div>
+            `;
+        }
+
+        function generateApp() {
+            const prompt = document.getElementById('appPrompt').value.trim();
+            if (!prompt) {
+                alert('Masukkan deskripsi aplikasi!');
+                return;
+            }
+
+            generatedCode = `<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${prompt}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            max-width: 700px;
+            text-align: center;
+        }
+        h1 { color: #667eea; margin-bottom: 20px; }
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ${prompt}</h1>
+        <p>Aplikasi ini dibuat oleh YAN AI Platform</p>
+        <button onclick="alert('Aplikasi berfungsi! ✨')">Klik Saya</button>
+    </div>
+</body>
+</html>`;
+
+            document.getElementById('appResult').classList.remove('hidden');
+            document.getElementById('codeContent').textContent = generatedCode;
+            document.getElementById('previewFrame').srcdoc = generatedCode;
+
+            stats.apps++;
+            saveStats();
+        }
+
+        function togglePreview() {
+            document.getElementById('appPreview').classList.toggle('hidden');
+        }
+
+        function downloadApp() {
+            const blob = new Blob([generatedCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `yanai_app_${Date.now()}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadMedia() {
+            const url = document.getElementById('downloadUrl').value.trim();
+            const statusDiv = document.getElementById('downloadStatus');
+            
+            if (!url) {
+                statusDiv.className = 'mt-4 p-4 rounded-xl bg-red-100 text-red-700';
+                statusDiv.textContent = '❌ Masukkan URL terlebih dahulu!';
+                statusDiv.classList.remove('hidden');
+                return;
+            }
+
+            statusDiv.className = 'mt-4 p-4 rounded-xl bg-blue-100 text-blue-700';
+            statusDiv.textContent = '⏳ Memproses download...';
+            statusDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                if (url.includes('tiktok')) {
+                    statusDiv.className = 'mt-4 p-4 rounded-xl bg-green-100 text-green-700';
+                    statusDiv.textContent = '✅ D
